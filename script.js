@@ -163,7 +163,7 @@ window.addEventListener('DOMContentLoaded', function(){
     }
 
     class Enemy {
-        constructor(gameWidth, gameHeight){
+        constructor(gameWidth, gameHeight, score){
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;
             this.width = 160;
@@ -176,7 +176,7 @@ window.addEventListener('DOMContentLoaded', function(){
             this.fps = 20;
             this.frameTimer = 0;
             this.frameInterval =1000/this.fps;
-            this.speed = 8; 
+            this.speed = 8 + (score / 3); 
             this.markedForDeletion = false;
         }
         draw(context){
@@ -212,9 +212,9 @@ window.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    function handleEnemies(deltaTime,score){
+    function handleEnemies(deltaTime){
         if(enemyTimer > enemyInterval + randomEnemyInterval) {
-            enemies.push(new Enemy(canvas.width, canvas.height));
+            enemies.push(new Enemy(canvas.width, canvas.height, score));
             console.log(enemies);
             randomEnemyInterval = enemyInterval + (Math.random() * 5000);
             enemyTimer = 0; 
@@ -223,7 +223,6 @@ window.addEventListener('DOMContentLoaded', function(){
         }
         enemies.forEach(enemy => {
             enemy.draw(ctx);
-            enemy.speed += score / 3;
             enemy.update(deltaTime);
         });
         enemies = enemies.filter(enemy => !enemy.markedForDeletion);
@@ -282,7 +281,7 @@ window.addEventListener('DOMContentLoaded', function(){
         background.update();
         player.draw(ctx);
         player.update(input, deltaTime, enemies);
-        handleEnemies(deltaTime,score);
+        handleEnemies(deltaTime);
         displayStatusText(ctx);
         if (!gameOver) requestAnimationFrame(animate);
     }
