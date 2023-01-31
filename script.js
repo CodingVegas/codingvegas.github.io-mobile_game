@@ -212,7 +212,7 @@ window.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    function handleEnemies(deltaTime){
+    function handleEnemies(deltaTime,score){
         if(enemyTimer > enemyInterval + randomEnemyInterval) {
             enemies.push(new Enemy(canvas.width, canvas.height));
             console.log(enemies);
@@ -223,6 +223,7 @@ window.addEventListener('DOMContentLoaded', function(){
         }
         enemies.forEach(enemy => {
             enemy.draw(ctx);
+            enemy.speed += score / 3;
             enemy.update(deltaTime);
         });
         enemies = enemies.filter(enemy => !enemy.markedForDeletion);
@@ -281,7 +282,7 @@ window.addEventListener('DOMContentLoaded', function(){
         background.update();
         player.draw(ctx);
         player.update(input, deltaTime, enemies);
-        handleEnemies(deltaTime);
+        handleEnemies(deltaTime,score);
         displayStatusText(ctx);
         if (!gameOver) requestAnimationFrame(animate);
     }
