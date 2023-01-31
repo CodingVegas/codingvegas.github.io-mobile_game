@@ -270,7 +270,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
     let lastTime = 0;
     let enemyTimer = 0;
-    let enemyInterval = 250;
+    let enemyInterval = 500;
     let randomEnemyInterval = enemyInterval + (Math.random() * 5000);
 
     function animate(timeStamp){
