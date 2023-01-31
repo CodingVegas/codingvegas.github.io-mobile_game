@@ -216,7 +216,7 @@ window.addEventListener('DOMContentLoaded', function(){
         if(enemyTimer > enemyInterval + randomEnemyInterval) {
             enemies.push(new Enemy(canvas.width, canvas.height));
             console.log(enemies);
-            randomEnemyInterval = Math.random() * 5000;
+            randomEnemyInterval = enemyInterval + (Math.random() * 5000);
             enemyTimer = 0; 
         } else {
             enemyTimer += deltaTime;
@@ -271,7 +271,7 @@ window.addEventListener('DOMContentLoaded', function(){
     let lastTime = 0;
     let enemyTimer = 0;
     let enemyInterval = 250;
-    let randomEnemyInterval = Math.random() * 5000;
+    let randomEnemyInterval = enemyInterval + (Math.random() * 5000);
 
     function animate(timeStamp){
         const deltaTime = timeStamp - lastTime;
