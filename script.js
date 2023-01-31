@@ -255,14 +255,14 @@ window.addEventListener('DOMContentLoaded', function(){
     function toggleFullScreen(){
         console.log(document.fullscreenElement);
         if (!document.fullscreenElement){
-            canvas.requestFullscreen().catch(err => {
-                alert(`Error, can't enable full-screen mode: ${err.message}`);
-            });
+            canvas.requestFullscreen();
         } else {
-            document.exitFullscreen();
+            if (document.exitFullscreen){
+                document.exitFullscreen();
+            }
         }
     }
-    fullScreenButton.addEventListener('click', toggleFullScreen);
+    fullScreenButton.addEventListener("click", toggleFullScreen);
 
     const input = new InputHandler();
     const player = new Player(canvas.width, canvas.height); 
